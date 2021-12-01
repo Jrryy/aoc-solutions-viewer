@@ -25,3 +25,14 @@ services:
        - ./frontend:/app
     ports:
       - "3000:3000"
+
+  proxy:
+    restart: always
+    image: "proxy"
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777"
+    depends_on:
+      - frontend

@@ -10,7 +10,7 @@ function App() {
     const [links, setLinks] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:8000/AoC-2021')
+        fetch('AoC-2021')
             .then(resp => resp.json())
             .then(elements => setLinks(elements))
     }, [])
