@@ -1,0 +1,4 @@
+[submodule "backend/aocs/AoC-2021"]
+	path = backend/aocs/AoC-2021
+	url = git@github.com:Jrryy/AoC-2021.git
+	branch = master

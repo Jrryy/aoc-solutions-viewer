@@ -1,0 +1,27 @@
+---
+version: "3"
+
+services:
+  backend:
+    restart: always
+    image: "backend"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/go/src/app
+    ports:
+      - "8000:8000"
+
+  frontend:
+    restart: always
+    image: "frontend"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      NODE_OPTIONS: --openssl-legacy-provider
+    volumes:
+       - ./frontend:/app
+    ports:
+      - "3000:3000"
