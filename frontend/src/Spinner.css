@@ -1,0 +1,20 @@
+svg.spinner {
+    width: 52px;
+    height: 52px;
+}
+
+svg.spinner circle {
+    fill: transparent;
+    stroke: #9199a9;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: calc(2.5 * 52);
+    transform-origin: calc(0.5px * 52) calc(0.5px * 52) 0;
+    animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(360deg);
+    }
+}
