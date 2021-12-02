@@ -1,16 +1,16 @@
 // noinspection BadExpressionStatementJS
 
 import './App.css';
-import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router';
+import {useEffect, useState} from 'react';
+import {Routes, Route} from 'react-router';
 import CodePage from './CodePage';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function App() {
     const [links, setLinks] = useState([]);
 
     useEffect(() => {
-        fetch('AoC-2021')
+        fetch('AoC-2021/')
             .then(resp => resp.json())
             .then(elements => setLinks(elements));
     }, []);
@@ -20,7 +20,7 @@ function App() {
             <div className="flex-initial p-10">
                 <ul>
                     {links.map(link => (
-                        <li>
+                        <li key={link}>
                             <Link to={link}>Day {link.slice(4)}</Link>
                         </li>
                     ))}
@@ -29,7 +29,7 @@ function App() {
             <div className="p-10">
                 <Routes>
                     {links.map(link => (
-                        <Route path={link} element={<CodePage day={link} />} />
+                        <Route path={link} element={<CodePage day={link}/>} key={link}/>
                     ))}
                 </Routes>
             </div>
