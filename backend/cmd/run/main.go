@@ -45,10 +45,13 @@ func executor(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Access-Control-Allow-Origin", "*")
     w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
     splitPath := strings.Split(r.URL.Path, "/")
     day := splitPath[len(splitPath)-1]
     codeFilePath := "./aocs/AoC-2021/" + day + "/code.py"
     inputFilePath := "./aocs/AoC-2021/" + day + "/input.txt"
+
+    // Does the code for thay day exist?
     _, err := os.Open(codeFilePath)
     if err != nil {
         w.WriteHeader(http.StatusNotFound)
@@ -59,7 +62,7 @@ func executor(w http.ResponseWriter, r *http.Request) {
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
-        // Truncate or create the input file
+        // Truncate or create the input.txt file
         f, err := os.Create(inputFilePath)
         if err != nil {
             w.WriteHeader(http.StatusInternalServerError)
@@ -87,16 +90,19 @@ func executor(w http.ResponseWriter, r *http.Request) {
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+		// Create the command to execute the python code with the new input
         cmd := exec.Command(
             "sh",
             "-c",
             fmt.Sprintf("cd ./aocs/AoC-2021/%s && time python3 code.py", day),
         )
+		// Execute and take the output
         output, err := cmd.CombinedOutput()
         if err != nil {
             w.WriteHeader(http.StatusInternalServerError)
             return
         }
+		// We only want the solutions and the real execution time
         splitOutput := strings.Split(fmt.Sprintf("%s", output), "\n")
         part1 := splitOutput[0]
         part2 := splitOutput[1]
