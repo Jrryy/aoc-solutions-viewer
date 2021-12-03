@@ -36,7 +36,7 @@ function CodePage(props) {
         <Spinner />
     ) : (
         <div className="flex flex-row">
-            <div className="text-sm">
+            <div className="text-sm font-mono">
                 <CopyBlock
                     text={code}
                     language="python"
