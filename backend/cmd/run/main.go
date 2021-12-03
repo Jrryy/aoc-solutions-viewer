@@ -94,7 +94,7 @@ func executor(w http.ResponseWriter, r *http.Request) {
         cmd := exec.Command(
             "sh",
             "-c",
-            fmt.Sprintf("cd ./aocs/AoC-2021/%s && time python3 code.py", day),
+            fmt.Sprintf("cd ./aocs/AoC-2021/%s && /usr/bin/time python3 code.py", day),
         )
 		// Execute and take the output
         output, err := cmd.CombinedOutput()
